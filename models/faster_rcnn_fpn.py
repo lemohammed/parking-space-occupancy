@@ -1,5 +1,6 @@
 from torch import nn
-from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
+from torchvision.models.detection.backbone_utils import FasterRCNN_MobileNet_V3_Large_320_FPN_Weights
+from torchvision.models.detection.backbone_utils import fasterrcnn_mobilenet_v3_large_fpn
 from torch.hub import load_state_dict_from_url
 
 from .utils import pooling
@@ -18,7 +19,7 @@ class FasterRCNN_FPN(nn.Module):
         
         # backbone
         # by default, uses frozen batchnorm and 3 trainable layers
-        self.backbone = resnet_fpn_backbone('resnet50', pretrained=True)
+        self.backbone = fasterrcnn_mobilenet_v3_large_fpn(weights=FasterRCNN_MobileNet_V3_Large_320_FPN_Weights.DEFAULT)
         hidden_dim = 256
         
         # pooling
@@ -28,12 +29,7 @@ class FasterRCNN_FPN(nn.Module):
         # classification head
         in_channels = hidden_dim * self.roi_res**2
         self.class_head = ClassificationHead(in_channels)
-        
-        # load coco weights
-        # url taken from: https://github.com/pytorch/vision/blob/master/torchvision/models/detection/faster_rcnn.py
-        weights_url = 'https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth'
-        state_dict = load_state_dict_from_url(weights_url, progress=False)
-        self.load_state_dict(state_dict, strict=False)
+   
         
         
     def forward(self, image, rois):
