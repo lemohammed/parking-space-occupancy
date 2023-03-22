@@ -117,7 +117,7 @@ def train_model(model, train_ds, valid_ds, test_ds, model_dir, device, lr=1e-4, 
         t0 = time.time()
         train_loss, train_accuracy = train_one_epoch(model, optimizer, train_ds, res)
         scheduler.step()
-        
+        z
         # evaluate on the valid dataset
         valid_loss, valid_accuracy = eval_one_epoch(model, valid_ds, res)
         

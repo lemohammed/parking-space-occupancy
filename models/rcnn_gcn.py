@@ -1,5 +1,5 @@
 from torch import nn
-from torchvision.models import resnext101_64x4d
+from torchvision.models import mobilenet_v3_large
 from torchvision.models._utils import IntermediateLayerGetter
 from torchvision.ops.misc import FrozenBatchNorm2d
 
@@ -20,7 +20,7 @@ class RCNN_GCN(nn.Module):
         
         # load pretrained backbone
         self.roi_res = roi_res
-        backbone = resnext101_64x4d(pretrained=True, norm_layer=FrozenBatchNorm2d)
+        backbone = mobilenet_v3_large(pretrained=True, norm_layer=FrozenBatchNorm2d)
         del backbone.fc
         self.backbone = IntermediateLayerGetter(backbone, return_layers={'avgpool': 'avgpool'})
         
