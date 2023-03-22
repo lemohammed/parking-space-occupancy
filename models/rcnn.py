@@ -22,6 +22,9 @@ class RCNN(nn.Module):
         for name, parameter in self.backbone.named_parameters():
             if all([not name.startswith(layer) for layer in layers_to_train]):
                 parameter.requires_grad_(False)
+            else:
+                parameter.requires_grad_(True)
+                
         
         # ROI pooling
         self.roi_res = roi_res
