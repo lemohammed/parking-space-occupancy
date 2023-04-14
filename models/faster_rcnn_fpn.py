@@ -1,5 +1,4 @@
 from torch import nn
-from torchvision.models.detection.backbone_utils import FasterRCNN_MobileNet_V3_Large_320_FPN_Weights
 from torchvision.models.detection.backbone_utils import fasterrcnn_mobilenet_v3_large_fpn
 from torch.hub import load_state_dict_from_url
 
