@@ -20,7 +20,7 @@ class FasterRCNN_FPN(nn.Module):
         # backbone
         # by default, uses frozen batchnorm and 3 trainable layers
         self.backbone = fasterrcnn_mobilenet_v3_large_fpn(
-            weight=FasterRCNN_MobileNet_V3_Large_FPN_Weights.COCO_V1, pretrained=True)
+            weight=FasterRCNN_MobileNet_V3_Large_FPN_Weights.COCO_V1,)
         hidden_dim = 256
 
         # pooling
