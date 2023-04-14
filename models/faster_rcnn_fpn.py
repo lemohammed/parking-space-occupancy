@@ -1,5 +1,5 @@
 from torch import nn
-from torchvision.models.detection import fasterrcnn_mobilenet_v3_large_fpn
+from torchvision.models.detection import fasterrcnn_mobilenet_v3_large_fpn, FasterRCNN_MobileNet_V3_Large_FPN_Weights
 from torch.hub import load_state_dict_from_url
 
 from .utils import pooling
@@ -19,7 +19,8 @@ class FasterRCNN_FPN(nn.Module):
 
         # backbone
         # by default, uses frozen batchnorm and 3 trainable layers
-        self.backbone = fasterrcnn_mobilenet_v3_large_fpn(pretrained=True)
+        self.backbone = fasterrcnn_mobilenet_v3_large_fpn(
+            weight=FasterRCNN_MobileNet_V3_Large_FPN_Weights.COCO_V1, pretrained=True)
         hidden_dim = 256
 
         # pooling
