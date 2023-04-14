@@ -33,7 +33,7 @@ class FasterRCNN_FPN(nn.Module):
 
     def forward(self, image, rois):
         # get backbone features
-        features = self.backbone(image[None])
+        features = self.backbone(image)
 
         # pool ROIs from features pyramid
         features = list(features.values())
