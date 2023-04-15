@@ -18,8 +18,7 @@ class RCNN(nn.Module):
         # load backbone
         self.backbone = resnext50_32x4d(
 
-            weights=ResNeXt50_32X4D_Weights.IMAGENET1K_V2,
-            pretrained=True, norm_layer=FrozenBatchNorm2d)
+            weights=ResNeXt50_32X4D_Weights.IMAGENET1K_V2, norm_layer=FrozenBatchNorm2d)
         self.backbone.fc = nn.Linear(in_features=2048, out_features=2)
 
         # freeze bottom layers
