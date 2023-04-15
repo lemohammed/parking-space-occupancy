@@ -1,5 +1,6 @@
 from torch import nn
 from torchvision.models import mobilenet_v3_large
+from torchvision.models import resnext50_32x4d, ResNeXt50_32X4D_Weights
 from torchvision.ops.misc import FrozenBatchNorm2d
 
 from .utils import pooling
@@ -15,7 +16,9 @@ class RCNN(nn.Module):
     def __init__(self, roi_res=100, pooling_type='square'):
         super().__init__()
         # load backbone
-        self.backbone = mobilenet_v3_large(
+        self.backbone = resnext50_32x4d(
+
+            weights=ResNeXt50_32X4D_Weights.IMAGENET1K_V2,
             pretrained=True, norm_layer=FrozenBatchNorm2d)
         self.backbone.fc = nn.Linear(in_features=2048, out_features=2)
 
