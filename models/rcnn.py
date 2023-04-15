@@ -22,7 +22,7 @@ class RCNN(nn.Module):
         self.backbone.fc = nn.Linear(in_features=2048, out_features=2)
 
         # freeze bottom layers
-        layers_to_train = ['features.14', 'features.15', 'features.16', ]
+        layers_to_train = ['layer3', 'layer.4', ]
         for name, parameter in self.backbone.named_parameters():
             if all([not name.startswith(layer) for layer in layers_to_train]):
                 parameter.requires_grad_(False)
